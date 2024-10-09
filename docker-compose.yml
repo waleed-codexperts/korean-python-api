@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  fastapi_app:
+    build: .
+    container_name: fastapi_app
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBIAN_FRONTEND=noninteractive
+    volumes:
+      - .:/app
+    command: ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+
+  # Optional: Add other services like a database, reverse proxy, etc.
+  # Example:
+  # db:
+  #   image: postgres:13
+  #   environment:
+  #     POSTGRES_USER: user
+  #     POSTGRES_PASSWORD: password
+  #     POSTGRES_DB: mydb
+  #   ports:
+  #     - "5432:5432"
+  #   volumes:
+  #     - db-data:/var/lib/postgresql/data
+
+# Optional: Define named volumes
+# volumes:
+#   db-data:
